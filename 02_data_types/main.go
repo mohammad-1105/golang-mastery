@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Data Types in Go
 
 /** Go has several built-in data types that can be categorized into the following groups:
@@ -61,4 +63,23 @@ func main() {
 	var name string = "Mohammad Aman"
 
 	println(isActive, a, b, c, pi, comp, name)
+
+	runeDataType()
+}
+
+func runeDataType() {
+	// Special types runes:
+	// Rune is an alias for int32 and represents Unicode Code Point. It's used when we want to work with characters (not bytes), especially non-ASCII texts.
+
+	// ! Always remember: rune use single quote ''
+	var ch rune = 'A'
+
+	var unicodeCharRune rune = '😊'
+
+	fmt.Println(ch)         // 65 (Unicode code point)
+	fmt.Println(string(ch)) // "A"
+
+	fmt.Println(unicodeCharRune)         // Unicode code point value
+	fmt.Println(string(unicodeCharRune)) // "😊"
+
 }
