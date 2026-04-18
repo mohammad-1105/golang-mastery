@@ -68,6 +68,17 @@ func main() {
 	fmt.Println("NewSliceAfterRemove: ", newSliceAfterRemove)
 
 	playingWithSlicesUsingSlicesPackage()
+
+	evenNumber := filterEven([]int{2, 3, 4, 5, 6, 7, 8})
+	fmt.Println("Even Number: ", evenNumber)
+
+	value, err := safeAccess([]int{1, 2, 3, 4, 5}, 10)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(value)
+	}
+
 }
 
 /* len and cap in slice:
@@ -200,10 +211,44 @@ func playingWithSlicesUsingSlicesPackage() {
 	var slice = []int{1, 2, 3, 4, 5}
 	clone := slices.Clone(slice)
 
+	var slice2 = []int{1, 2, 3, 4, 5}
+
 	fmt.Println("originalSlice: ", slice)
 	fmt.Println("cloneSlice: ", clone)
 
+	isEqual := slices.Equal(slice, clone)
+	fmt.Println("is Equal slice and clone: ", isEqual)
+
+	isSliceEqual := slices.Equal(slice, slice2)
+	fmt.Println("is Equal slice and slice2: ", isSliceEqual)
+
 	slices.Reverse(slice)
 	fmt.Println("reversedSlice: ", slice)
+
+}
+
+// Advanced slice operations
+// slice filtering
+
+func filterEven(numbers []int) []int {
+	var result []int
+
+	for _, num := range numbers {
+		if num%2 == 0 {
+			result = append(result, num)
+		}
+	}
+	return result
+
+}
+
+// error handling
+
+func safeAccess(slice []int, index int) (int, error) {
+
+	if index < 0 || index > len(slice) {
+		return 0, fmt.Errorf("Index out of bound. You are trying to access index %d but slice length is %d\n", index, len(slice))
+	}
+	return slice[index], nil
 
 }
